@@ -7,14 +7,7 @@ FSJS project 2 - List Filter and Pagination
 
 
 /*** 
-   Add your global variables that store the DOM elements you will 
-   need to reference and/or manipulate. 
-   
-   But be mindful of which variables should be global and which 
-   should be locally scoped to one of the two main functions you're 
-   going to create. A good general rule of thumb is if the variable 
-   will only be used inside of a function, then it can be locally 
-   scoped to that function.
+   Global Variables
 ***/
 
 const students = document.querySelectorAll(".student-item");
@@ -22,18 +15,7 @@ const PAGE_LENGTH = 10;
 
 
 /*** 
-   Create the `showPage` function to hide all of the items in the 
-   list except for the ten you want to show.
-
-   Pro Tips: 
-     - Keep in mind that with a list of 54 students, the last page 
-       will only display four.
-     - Remember that the first student has an index of 0.
-     - Remember that a function `parameter` goes in the parens when 
-       you initially define the function, and it acts as a variable 
-       or a placeholder to represent the actual function `argument` 
-       that will be passed into the parens later when you call or 
-       "invoke" the function 
+   showPage, changes list to only display given students
 ***/
 
 const showPage = (page) => {
@@ -51,8 +33,7 @@ const showPage = (page) => {
 }
 
 /*** 
-   Create the `appendPageLinks function` to generate, append, and add 
-   functionality to the pagination buttons.
+   appendPageLinks, dynamically creates page links based on size of student record.
 ***/
 const appendPageLinks = () => {
   let pages = (students.length/PAGE_LENGTH);
@@ -64,6 +45,7 @@ const appendPageLinks = () => {
   page.appendChild(div);
   div.style.display = "block";
   div.appendChild(ul);
+
     //assemble them dynamically
   for(let i = 1; i < pages+1; i++){
     console.log("hello");
@@ -76,18 +58,17 @@ const appendPageLinks = () => {
       //add event listener
     a.addEventListener("click", (e) => {
       const links = document.getElementsByTagName("a");
+        //make all links inactive
       for(let i = 0; i < links.length; i++){
         links[i].className = "";
       }
+        //reactivate target link
       e.target.className = "active";
 
       showPage(e.target.textContent);
     });
   }
 }
-
+  //tell program to do it all
 appendPageLinks();
 showPage(1);
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
